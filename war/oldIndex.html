@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <!-- Google Font  -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+
+
+        <!-- <a href="grid.html">grid</a> -->
+        
+        <div class="wrappper">
+            <h1> War - The Card Game </h1>
+            <a class="btn" id="new-deck">New Game</a>
+            <hr size="8" width="90%" color="red">  
+            <!-- <p id='response'>response</p> -->
+
+            <div class="columns">
+                <div id="Me" >
+                    <h2>Me</h2> 
+                    <div id="pile_1" class="col">Pile 1 </div>
+                    <div id="card_1" class="col"> </div>
+                </div>
+
+                <div id="Opponent">
+                    <h2>Opponent</h2> 
+                    <div id="card_2" class="col"> </div>
+                    <div id="pile_2" class="col"> Pile 2 </div>
+                </div>
+            </div>
+
+
+            <div id="cards"></div>
+            <a class='btn' id='draw-cards'>Draw</a>
+            
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>

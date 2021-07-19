@@ -20,11 +20,9 @@ document.getElementById("draw-cards").addEventListener("click", () => {
             // document.getElementById("card_1").innerHTML =data.cards[0].image
             card1_link = "<img src=" + data.cards[0].image +">"
             document.getElementById("card_1").innerHTML = card1_link
-            document.getElementById("pile_1").innerHTML = card1_link
 
             card2_link = "<img src=" + data.cards[1].image +">"
             document.getElementById("card_2").innerHTML = card2_link
-            document.getElementById("pile_2").innerHTML = card2_link
         
             // document.getElementById("card_2").innerHTML ='
             // <img src=${data.cards[1].image} />'

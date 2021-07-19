@@ -10,33 +10,19 @@
     <body>
 
 
-        <!-- <a href="grid.html">grid</a> -->
+        <h1> War - The Card Game </h1>
+        <a class="btn" id="new-deck">New Game</a>
         
-        <div class="container">
-            <h1> Play War </h1>
-            <a class="btn" id="new-deck">New Game</a>
-            <hr size="8" width="90%" color="red">  
-            <!-- <p id='response'>response</p> -->
-
-            <div class="columns">
-                <div id="Me" >
-                    <h2>Me</h2> 
-                    <div id="pile_1" class="col">Pile 1 </div>
-                    <div id="card_1" class="col"> </div>
-                </div>
-
-                <div id="Opponent">
-                    <h2>Opponent</h2> 
-                    <div id="card_2" class="col"> </div>
-                    <div id="pile_2" class="col"> Pile 2 </div>
-                </div>
-            </div>
-
-
-            <div id="cards"></div>
-            <a class='btn' id='draw-cards'>Draw</a>
-            
+        <!-- <hr size="8" width="90%" color="red">  -->
+       
+        <div class="wrapper">
+            <div id="pile_1">Pile 1</div>
+            <div id="card_1">Card 1</div>
+            <div id="card_2">Card 2</div>
+            <div id="pile_2">Pile 2</div>
         </div>
+         
+        <a class='btn' id='draw-cards'>Draw</a>
         <script src="index.js"></script>
     </body>
 </html>

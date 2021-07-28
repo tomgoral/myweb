@@ -1,5 +1,6 @@
 {
   "recommendations": [
-    "sidthesloth.html5-boilerplate"
+    "sidthesloth.html5-boilerplate",
+    "ms-edgedevtools.vscode-edge-devtools"
   ]
 }

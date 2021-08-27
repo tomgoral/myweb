@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "war"
+		},
+		{
+			"path": "warTests"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "war"
+	}
+}

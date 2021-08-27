@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> TEST SITE</title>
+  </head>
+  <body>
+    <h1>Heading</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum sunt quas enim minus minima ipsum natus modi eius, vitae velit fuga omnis. Id praesentium quaerat dolore sit debitis quam adipisci.</p>
+
+    <img src ="https://picsum.photos/300?random" alt="">
+
+
+    <script>
+    
+    document.addEventListener("DOMContentLoaded", async()=>{
+       const result  = await loadNewDeck();
+       console.log(result);
+
+       let cardsRemaining = result["remaining"];
+       console.log(cardsRemaining)
+
+       while (cardsRemaining > 0){
+
+          const result2 = await drawCardsFromDeck(result.deck_id,2);
+          console.log(result2)
+
+          console.log(result2['cards'][0]['code'])
+          console.log(result2['cards'][1]['code'])
+
+          const pile01 = await addToPile(result.deck_id, "pile01", result2['cards'][0]['code'])
+
+          console.log(pile01)
+
+          const pile02 = await addToPile(result.deck_id, "pile02", result2['cards'][1]['code'])
+
+          console.log(pile02)
+          console.log("Remaining: ",pile02["remaining"])
+          cardsRemaining = pile02["remaining"]
+
+
+       }
+
+
+
+
+
+
+      })
+
+       
+    async function loadNewDeck(){
+      let urlNewDeck ="https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
+      return  (await fetch((urlNewDeck))).json();
+      }
+
+    async function drawCardsFromDeck(deckId, numCards){
+      let urlDrawCards ="https://deckofcardsapi.com/api/deck/" + deckId + "/draw/?count=" + numCards;
+      return  (await fetch((urlDrawCards))).json();
+      }
+
+    async function addToPile(deckId, pileName, card){
+      let urlAddToPile ="https://deckofcardsapi.com/api/deck/" + deckId + "/pile/" + pileName +"/add/?cards=" + card;
+      return  (await fetch((urlAddToPile))).json();
+      }
+
+
+    </script>
+
+
+
+
+    
+  </body>
+</html>

@@ -1,53 +1,77 @@
-let deckId, deck_count, pile01_count, pile02_count
+document.getElementById("new-deck").addEventListener("click",async()=>{
+    const result  = await loadNewDeck();
+    console.log(result);
+
+    let cardsRemaining = result["remaining"];
+    console.log(cardsRemaining)
+
+    while (cardsRemaining > 0){
+
+       const result2 = await drawCardsFromDeck(result.deck_id,2);
+       console.log(result2)
+
+       console.log(result2['cards'][0]['code'])
+       console.log(result2['cards'][1]['code'])
+
+       const pile01 = await addToPile(result.deck_id, "pile01", result2['cards'][0]['code'])
+       console.log(pile01)
+       document.getElementById("pile_1").innerHTML = "<img src=img/cardback.png>";
+       document.getElementById("myCardPile").innerHTML = pile01["piles"]["pile01"]["remaining"];
 
 
-document.getElementById("new-deck").addEventListener("click", getNewDeck)
+       const pile02 = await addToPile(result.deck_id, "pile02", result2['cards'][1]['code'])
+       console.log(pile02)
+       console.log("Remaining: ",pile02["remaining"])
+       cardsRemaining = pile02["remaining"];
+       document.getElementById("pile_2").innerHTML = "<img src=img/cardback.png>";
+       document.getElementById("yourCardPile").innerHTML = pile02["piles"]["pile02"]["remaining"];
 
-function getNewDeck() {
-    fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            deck_count = data.remaining;
-            deckId     = data.deck_id;
-            console.log(deckId, deck_count)
-            makeTwoPiles(deckId,deck_count);
-        })
-return deckId, deck_count
-}
+    }
 
-function makeTwoPiles(deckId,deck_count){
-     while (deck_count > 0) {
-    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        deck_count = data.remaining;
-        deckId     = data.deck_id;
-        console.log(deckId, deck_count)
-        
-    }) 
-  }
-}
+    // document.getElementById("pile_1").innerHTML = "<img src=img/cardback.png>";
+    // document.getElementById("myCardPile").innerHTML = pile01["piles"]["pile01"]["remaining"];
+    // document.getElementById("pile_2").innerHTML = "<img src=img/cardback.png>";
+    // document.getElementById("myCardPile").innerHTML = pile01["piles"]["pile01"]["remaining"];
+
+   })
+
+  
+   document.getElementById("draw-cards").addEventListener("click",async()=>{
+
+    let inPlay01 = [];
+    let inPlay02 = [];
   
 
+   })
 
-document.getElementById("draw-cards").addEventListener("click", () => {
-    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data.cards)
-            // document.getElementById("card_1").innerHTML =data.cards[0].image
-            card1_link = "<img src=" + data.cards[0].image +">"
-            document.getElementById("card_1").innerHTML = card1_link
-            document.getElementById("pile_1").innerHTML = "<img src=img/cardback.png>"
 
-            card2_link = "<img src=" + data.cards[1].image +">"
-            document.getElementById("card_2").innerHTML = card2_link
-            document.getElementById("pile_2").innerHTML = "<img src=img/cardback.png>"
-        
-        })
-})
+
+
+//  Async Functions ================================================
+
+
+
+
+
+ async function loadNewDeck(){
+   let urlNewDeck ="https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
+   return  (await fetch((urlNewDeck))).json();
+   }
+
+ async function drawCardsFromDeck(deckId, numCards){
+   let urlDrawCards ="https://deckofcardsapi.com/api/deck/" + deckId + "/draw/?count=" + numCards;
+   return  (await fetch((urlDrawCards))).json();
+   }
+
+ async function addToPile(deckId, pileName, card){
+   let urlAddToPile ="https://deckofcardsapi.com/api/deck/" + deckId + "/pile/" + pileName +"/add/?cards=" + card;
+   return  (await fetch((urlAddToPile))).json();
+   }
+
+async function takeFromPile(deckId, pileName, numCards){
+    let urlTakeFromPile ="https://deckofcardsapi.com/api/deck/" + deckId + "/pile/" + pileName +"/draw/?count=" + numCards;
+    return  (await fetch((urlTakeFromPile))).json();
+    }
 
 
 
